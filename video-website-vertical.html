@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram and TikTok Attention Grabbing Hooks 2025</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+        .video-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+        .video-container {
+            position: relative;
+            padding-top: 177.78%; /* 16:9 -> 9:16 aspect ratio for vertical videos */
+            background: #000;
+        }
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Changed to contain to prevent stretching */
+        }
+        .btn-download {
+            background: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+        .btn-download:hover {
+            background: #45a049;
+        }
+        .pagination-btn {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            padding: 8px 16px;
+            margin: 0 4px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .pagination-btn:hover {
+            background: #f7fafc;
+        }
+        .pagination-btn.active {
+            background: #4299e1;
+            color: white;
+            border-color: #4299e1;
+        }
+        .pagination-btn:disabled {
+            background: #edf2f7;
+            cursor: not-allowed;
+            color: #a0aec0;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-6 text-center">
+            <h1 class="text-3xl font-bold text-gray-800">Instagram and TikTok Attention Grabbing Hooks 2025</h1>
+            <p class="text-gray-600 mt-2">Browse and search through our video collection</p>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4">
+        <div class="my-8 flex justify-center">
+            <input type="text" id="searchInput" placeholder="Search videos..." 
+                   class="w-full max-w-md px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div id="videoGrid" class="video-grid">
+            <!-- Videos will be dynamically inserted here -->
+        </div>
+
+        <div id="pagination" class="flex justify-center items-center gap-2 py-8">
+            <!-- Pagination will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        // Video data directly in the code
+        // Video data directly in the code
+        const videoData = {
+            "videos": [
+    {
+      "name": "Flip on Head",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Flip-on-Head.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DASZHL3Nfz9/?igsh=OGlrNTFjanN0dHM3"
+    },
+    {
+      "name": "Bike Crash",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Bike-Crash.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DAP0T5dtvg9/?igsh=MTJpbzk2bGY0aHgxZQ%3D%3D"
+    },
+    {
+      "name": "Slip Run",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Slip-Run.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DAKqsa3t_j6/?igsh=MWFpdmg5ZzFwbDlo"
+    },
+    {
+      "name": "Sack Whack",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Sack-Whack.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DBHy0EvpkH6/?igsh=MWFyY2RlaGd3aXRlZQ%3D%3D"
+    },
+    {
+      "name": "Lil Whip",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Lil-Whip.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DAzmf-kohLz/?igsh=eWU4djgxc2o1cmJz"
+    },
+    {
+      "name": "Watermelon Split",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Watermelon-Split.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DCh0eHrNSuB/?igsh=aTVqbzhvYnRhOWV3"
+    },
+    {
+      "name": "Lil Zipline",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Lil-Zipline.mov",
+      "inspirationLink": "https://www.instagram.com/reel/DDX9dQNy_7S/"
+    },
+    {
+      "name": "Powder Boom",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Powder-Boom.mov",
+      "inspirationLink": "https://www.instagram.com/reel/DA84OntN35M/"
+    },
+    {
+      "name": "Tuck & Roll",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Tuck-N-Roll.mp4",
+      "inspirationLink": "https://www.instagram.com/p/DC68SaRtbyI/"
+    },
+    {
+      "name": "Front Roll",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Front-Roll.mp4",
+      "inspirationLink": "https://www.instagram.com/p/DDPmn4StCF7/"
+    },
+    {
+      "name": "Trail Flipper",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Trail-Flipper.mp4",
+      "inspirationLink": "https://www.instagram.com/p/DDWKu7uK0Tr/"
+    },
+    {
+      "name": "Kick Golf Ball",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Kick-Golf-Ball.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DCmxvAdPfjm/?igsh=YXF0ZXRidnB5Zjlt"
+    },
+    {
+      "name": "Rate This Dunk",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Rate-this-dunk.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DCz7QKdy5JU/?igsh=cWJpNGRhZGtzdnY4"
+    },
+    {
+      "name": "Gingerbread Fall",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Gingerbread-Fall-1.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DDFebn9yj7k/?igsh=MXJ1MTU0MW0zYnFteg%3D%3D"
+    },
+    {
+      "name": "Small Wheel",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Small-Wheel.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-uQSmCqhDG/?igsh=MXZtcmR2MG53b3QxMg%3D%3D"
+    },
+    {
+      "name": "Boxing KO",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Boxing-KO.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DDJYR16xM0g/?igsh=MTF6Y21hb3V0bjdyYw%3D%3D"
+    },
+    {
+      "name": "Bumpy Slide",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Bumpy-Slide.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DB_WC2fOw94/"
+    },
+    {
+      "name": "Front Kick KO",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Front-Kick-KO.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DC1aZ06uxLO/"
+    },
+    {
+      "name": "Uppercut",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Uppercut.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DC3_N8huByp/"
+    },
+    {
+      "name": "Ice Slide",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Ice-Slide.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DDHYttZOCIp/"
+    },
+    {
+      "name": "Coaster Drop",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/12/Coaster-Drop.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DBNAG9gS_fK/?igsh=OTdramYxdWw3djh2"
+    },
+    {
+      "name": "Miss A Sound",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Miss-A-Sound.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DCDJN5zyW1u/?igsh=N2IzYXBrbXg5anJs"
+    },
+    {
+      "name": "Look At You",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Look-At-You.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DA6ANgrKBNE/?igsh=MW4wbnR0djhjbTB3YQ%3D%3D"
+    },
+    {
+      "name": "Throw Shovel",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Throw-Shovel.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DCy1xmJudj6/?igsh=djI5Z2FobThqdHgx"
+    },
+    {
+      "name": "Wake Up Water",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Wake-Up-Water-1.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DBKU2UjpVxC/?igsh=eTJ0djU1bGcwZXll"
+    },
+    {
+      "name": "Pig Flop",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Pig-Flop.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DA-KqrWtPbM/?igsh=MWxkbzFuem9udXNxZw%3D%3D"
+    },
+    {
+      "name": "Bike Tumble",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Bike-Tumble.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DBKNMMYMqbr/?igsh=MWcwMHVtZXBsamI5cw%3D%3D"
+    },
+    {
+      "name": "Duck Heart",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Duck-Heart.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DCaTK-SRd2h/?igsh=dGU1N2NncWN4c3dx"
+    },
+    {
+      "name": "Samurai Sword",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Samari-Sword.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_QxmXntxpN/?igsh=dm5vZnFmcXVrbmRk"
+    },
+    {
+      "name": "Horse Kick",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Horse-Kick.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-H1Y4gy9CF/?igsh=MXFleHBtdjZrOTcwNQ%3D%3D"
+    },
+    {
+      "name": "Bucket Toss",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Bucket-Toss.mp4",
+      "inspirationLink": "https://www.instagram.com/torro.io"
+    },
+    {
+      "name": "Car Flip Over",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Car-Flip-Over.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DAltD7qtCrM/?igsh=OHYzNDlqcm1wdHQw"
+    },
+    {
+      "name": "Kick to Head",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Kick-to-Head.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DANPe9AN23b/?igsh=MTQ3Ym1pMWU5NWpjNA%3D%3D"
+    },
+    {
+      "name": "No Pants Workout",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/No-Pants-Workout.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DCUY8UwM4v7/?igsh=emUyamU0bG5tbnNs"
+    },
+    {
+      "name": "Double Everything",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Double-Everything.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-xgpJ-trXp/?igsh=MWN3dTRmem1zbXN4Yg%3D%3D"
+    },
+    {
+      "name": "Little Tug",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Little-Tug.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DCH-_6CAUxn/?igsh=MTIycTN6NGp5aXR0dA%3D%3D"
+    },
+    {
+      "name": "Feed Gator",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Feed-Gator.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C9TRPvmOYFa/?igsh=eTc5ZHVtbHpmeW41"
+    },
+    {
+      "name": "Big Splash",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/BIG-Splash.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C8QqskmR4--/?igsh=MWp3b25wemVkZTlrbw%3D%3D"
+    },
+    {
+      "name": "Glass Break",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Glass-Break.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DBLY6p-NIgu/?igsh=MWFxYWY5ZTc4YzhoYQ%3D%3D"
+    },
+    {
+      "name": "Tire Pop",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Tire-Pop.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-sIwUvgjZk/?igsh=eHg5Y2RlZ3loejB0"
+    },
+    {
+      "name": "Basketball Fake",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Basketball-Fake.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DBgyPZwiz7-/?igsh=MW4zczNkb2dqbnhwcQ%3D%3D"
+    },
+    {
+      "name": "Moon Jump",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Moon-Jump-Hook.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-XYsnMS1AR/?igsh=MWlpN21kNWxiZXIwNw%3D%3D"
+    },
+    {
+      "name": "Tube Launch",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Tube-Launch.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C9iELGdoQjD/?igsh=MWh5dHlrc2Nna3Rneg%3D%3D"
+    },
+    {
+      "name": "Rear End Bike",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Rear-End-Bike.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-U3UUrJsJp/?igsh=MTI5N3VxdmsyenZueg%3D%3D"
+    },
+    {
+      "name": "Car Lift",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Car-Lift.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DBrNqFqIcX9/?igsh=MXY3cG16MnMzMDdyYQ%3D%3D"
+    },
+    {
+      "name": "Dent Hood",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Dent-Hood.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DBydW31uyJ6/?igsh=NWVlOWM1Z2NlbjEw"
+    },
+    {
+      "name": "Ape Water",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/11/Ape-Water.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C8zXnBJRKxA/?igsh=eW05OWE3cXZ4Yndl"
+    },
+    {
+      "name": "Water Launch",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Water-Launch.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_232n-ztR5/?igsh=cmVyYWU1NjBwNmI1"
+    },
+    {
+      "name": "Hood Bump",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Hood-Bump.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DA2cTION5xk/?igsh=OG1iOGJqcGV0ZGdv"
+    },
+    {
+      "name": "Power Slap Fall",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Power-Slap-Fall.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_HL1cdSzCr/?igsh=MWZ6OXQ0aWFwNWl1ZA%3D%3D"
+    },
+    {
+      "name": "Corn Throw",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Corn-Throw.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DBM2yxAxzTB/?igsh=MW42dTk0bzZsZDZhZA%3D%3D"
+    },
+    {
+      "name": "Kick Back Ball",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Kick-Ball-Back.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C71T01FN8WY/?igsh=MXNvZHA3cGRmb2trYw%3D%3D"
+    },
+    {
+      "name": "Dog Kick",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Dog-Kick.mp4",
+      "inspirationLink": "https://www.instagram.com/torro.io"
+    },
+    {
+      "name": "Gorilla Butt",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Gorilla-Butt.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C7SS_2BPhDB/?igsh=bW83YjlvcGxmZmNw"
+    },
+    {
+      "name": "Cute Pigs",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Cute-Pigs.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C8LRFFxuRDl/?igsh=MXBsd3ppbmtxY2FhZg%3D%3D"
+    },
+    {
+      "name": "Mid-Air Crash",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Mid-Air-Crash.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C6d3_s6BDUl/?igsh=MTZ0eHcyNG5wa2k5OA%3D%3D"
+    },
+    {
+      "name": "Break Camera",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Break-Camera.mp4",
+      "inspirationLink": "https://www.instagram.com/p/DBcReqqvVVK/"
+    },
+    {
+      "name": "Roof Collapse",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Roof-Collapse.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C9xycFixUTi/?igsh=cHVvc3p2ZmVpejA%3D"
+    },
+    {
+      "name": "Josie Bike",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Josie-Bike.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DARrgPxySDO/?igsh=NDUxdng4Z2RtaXdq"
+    },
+    {
+      "name": "Gorilla Spin",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Gorilla-Spin.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-sMyhQu8M1/?igsh=Z3llcDRwdGV2bG9n"
+    },
+    {
+      "name": "Sledge Hammer",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Sledge-Hammer.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-a5qj0Ok_K/?igsh=MXY2amtmOXRqNGl5dQ%3D%3D"
+    },
+    {
+      "name": "Head Bang",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Head-Bang.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DBNenpCPkbO/?igsh=eGhkdGxoMGhiNDZu"
+    },
+    {
+      "name": "Cow Roof",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Cow-Roof.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C92lTWTu8V9/?igsh=MTdyeWtyZmMzNGhiaA%3D%3D"
+    },
+    {
+      "name": "No Babies",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/No-Babies.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DARltWphxh3/?igsh=NWEwMjZncnZrdDRx"
+    },
+    {
+      "name": "Vodka Stairs",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Vodka-Stairs.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_iw8urNSs9/?igsh=enE5bWJoZ2V6MXlh"
+    },
+    {
+      "name": "Plane Crash",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Plane-Crash.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DBGghkwyoIC/?igsh=eWVyY2lvbTJycXJt"
+    },
+    {
+      "name": "UFC Slap",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/UFC-Slap.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DAdVgLiPxUq/?igsh=MTR5bzI2eDNkdWU2eA%3D%3D"
+    },
+    {
+      "name": "Soccer Launch",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Soccer-Launch.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C8PUJSKCZK3/?igsh=MThtcGllYWhldGRlNA%3D%3D"
+    },
+    {
+      "name": "Wine Shot",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Wine-Shot.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_iEYbgt7dx/?igsh=MW5hdGptbTJpOWNrOQ%3D%3D"
+    },
+    {
+      "name": "Pinata Catch",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Pinata-Catch.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DAN8Bw7u2KS/?igsh=cmN2Z2tsOGNuc3Rs"
+    },
+    {
+      "name": "UFC Cartwheel",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/UFC-Cartwheel.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DAdgZP0uyW6/?igsh=bnBxZWV5Z3J5Mmpz"
+    },
+    {
+      "name": "Tree Jump",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Tree-Jump.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_WTEQwJtc6/?igsh=d2RmcnJsdG80aXU3"
+    },
+    {
+      "name": "Back Flop",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Back-Flop.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_k2L2BO-jd/?igsh=ZHVrcXdja3oxdDIw"
+    },
+    {
+      "name": "Softball Scream",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Softball-Scream.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DA1IHhEOux5/?igsh=cmM2eTllOW1yeHNp"
+    },
+    {
+      "name": "Monkey Window",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Monkey-Window.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C77ggMYpGFM/?igsh=Y3RidTIyY245bzUz"
+    },
+    {
+      "name": "Exhaust Smoke",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Exhaust-Smoke.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C92h2WzxRok/?igsh=NGF0N3h0ajQyeWR0"
+    },
+    {
+      "name": "Water Jug",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Water-Jug.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C9kQkH9vucY/?igsh=MW13c280eXJicmF5Mg%3D%3D"
+    },
+    {
+      "name": "Reverse Kicker",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Reverse-Kicker.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DAEfuiJsb6U/?igsh=cWx5cGttNGpqbmlq"
+    },
+    {
+      "name": "Dog Sweep",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Dog-Sweep.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_A-v7BAVoi/?igsh=OW94dWI1c3AzM3Zs"
+    },
+    {
+      "name": "Camera Smash",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Camera-Smash.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_AdvVLoUHv/?igsh=bnV2ZXB2dHNtajk%3D"
+    },
+    {
+      "name": "Contractor Injury",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Contractor-Injury.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DAfXZXXo9Jm/?igsh=OWtydzV4cndkaXVt"
+    },
+    {
+      "name": "Motorcycle Crash",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Motorcycle-Crash.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DAa9P3WJKqA/?igsh=MTRheTA4dG03NjV2Yg%3D%3D"
+    },
+    {
+      "name": "Pogo Leap",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Pogo-Leap.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_alZtTygNu/?igsh=MWlzc3Y3NDlkMXhlNg%3D%3D"
+    },
+    {
+      "name": "Sandy Flip Fail",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Sandy-Flip-Fail.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_YXgq7tOnY/?igsh=MWNjeW9meWZrMnV1eQ%3D%3D"
+    },
+    {
+      "name": "Cop Slide",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Cop-Slide.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C8-SEOmx22B/?igsh=MTBoMjRvZnE4cGs0dw%3D%3D"
+    },
+    {
+      "name": "Launch Tackle",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Launch-Tackle.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DAZjXQdAHpD/?igsh=ZHJ6cGQwZ2txczN1"
+    },
+    {
+      "name": "Night Soccer",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/10/Night-Soccer.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C8pIpjaO4DS/?igsh=bXdhMWhyaTh2bnJw"
+    },
+    {
+      "name": "Pull Up Fail",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Pull-Up-Fail.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_dQfb9uXU9/?igsh=dDNnZGJwcG5reDZu"
+    },
+    {
+      "name": "TP Toss",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/TP-Toss.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_-ugZlRcWo/?igsh=MXUxc2FhYjV4Z2k3dA%3D%3D"
+    },
+    {
+      "name": "Skateboard Flop",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Skateboard-Flop.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DALmWrzRDJR/?igsh=dDI3OWwyajFxYW53"
+    },
+    {
+      "name": "River Jump",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/River-Jump.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-xZ1m6A9Ep/?igsh=MXBpYWg1cnpwN2xjaA%3D%3D"
+    },
+    {
+      "name": "Dog \"Stay\"",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Stay-Dog.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DAcWtOBvl5-/?igsh=bWd6emlyaW16djU4"
+    },
+    {
+      "name": "Back Flop",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Back-Flop.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C9w0P9iAYfQ/?igsh=MXNhZHVpaWpzbzlwcQ%3D%3D"
+    },
+    {
+      "name": "Sun Launch",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Sun-Launch.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C81wPd5JYir/?igsh=anBrdGg4aTU3YXp0"
+    },
+    {
+      "name": "BMX Budget",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/BMX-Budget.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C7RHDGXSv88/?igsh=MXJ6NG03dXgyZTc5Yg%3D%3D"
+    },
+    {
+      "name": "Coconut Tree",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Coconut-Tree.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C9-owfhPXTo/?igsh=MWM5YmhtYm8xYnNidA%3D%3D"
+    },
+    {
+      "name": "Street Surfing",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Surfering-Fail.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/DARoMbApgZs/?igsh=ZzdsNDNudno0Zzk1"
+    },
+    {
+      "name": "Football Tackle",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Football-Tackle.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_vQHxcPs7j/?igsh=aDdiZGhpc2w0dXlo"
+    },
+    {
+      "name": "Matthew in Love",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Matthew-in-Love.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-Fp-HyItau/?igsh=aXU3MTlpenVnY2J1"
+    },
+    {
+      "name": "Bottle Opener",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Bottle-Open.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-ndGnpoyEP/?igsh=MXNsZGw4MWIwdGJyZQ%3D%3D"
+    },
+    {
+      "name": "Pancake Flip",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Pancake-Flip.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_dwc7RiiFq/?igsh=cnl0cTg5MGQ1cWY3"
+    },
+    {
+      "name": "Dog Kick to Face",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Dog-Kick-to-Face.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C92mFDavhCk/?igsh=OGNwY3VoM3RoODFn"
+    },
+    {
+      "name": "Unicycle Smash",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Unicycle-Smash.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C9h4rV9vpvO/?igsh=YXl1OTZsZWxrcm45"
+    },
+    {
+      "name": "Water on Phone",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Water-on-Phone.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-6CA8byCdj/?igsh=NTNvODJ6em8zYzU2"
+    },
+    {
+      "name": "UFC Knockout",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/UFC-Knockout.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C59Lcn1uY2K/?igsh=MTI5dHFsbHJ5Z3B0eg%3D%3D"
+    },
+    {
+      "name": "Tree Surprise",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Tree-Surprise.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_VevswxuHV/?igsh=c3kwMDlkMTA2bXBu"
+    },
+    {
+      "name": "Snowball Splash",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Snowball-Splash.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-myo82MTa7/?igsh=MTVqajh1NGprNHhmdA%3D%3D"
+    },
+    {
+      "name": "Opposite Cookie",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Opposite-Cookie.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_8lhddIL1m/?igsh=czVpOXB6ZjNna2hr"
+    },
+    {
+      "name": "Sandy Front Flip",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Front-Flip-Sand.mp4",
+      "inspirationLink": "https://www.instagram.com/p/C_9SfYSpe19/?igsh=a2YyYWxibTh0c2l5&img_index=4"
+    },
+    {
+      "name": "Jump in Pool",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Jump-in-Pool.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-m4w_mu7jh/?igsh=MTlnM2N0aGFzbm1mag%3D%3D"
+    },
+    {
+      "name": "Wedding Cry",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Wedding-Cry.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_1rFC2Mn8x/?igsh=MWxkYTZtN2IyZWt3eQ%3D%3D"
+    },
+    {
+      "name": "Pogo Stick Fail",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Pogo-Stick-Fail.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_YFhbEx7sl/?igsh=ZDNsMXR3dXk0bDYx"
+    },
+    {
+      "name": "Board Break",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Board-Break.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_0BMKtv4Fc/?igsh=bTZnMG1zZnFvc2J2"
+    },
+    {
+      "name": "Construction Water",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Construction-Blast.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_0BMKtv4Fc/?igsh=bTZnMG1zZnFvc2J2"
+    },
+    {
+      "name": "Heights Jump",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Heights-Jump.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_x9QnGPWfr/?igsh=OXZwanV4aTVlMTQw"
+    },
+    {
+      "name": "School Girl Punch",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Girl-Punching.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_fqsCZSO-_/?igsh=aWYxbmh0cG51c3Fi"
+    },
+    {
+      "name": "Water Ride Splash",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Water-Ride-Splash.mp4",
+      "inspirationLink": "https://www.instagram.com/torro.io"
+    },
+    {
+      "name": "Motorcycle Slipper",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Motorcycle-Slipper.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C8w0AXGS4EK/?igsh=YXg5bDY1eDF6MmFj"
+    },
+    {
+      "name": "Little Laces",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Little-Laces.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-QQlkXuFlR/?igsh=MWdkZnk2bHhiMGFzMg%3D%3D"
+    },
+    {
+      "name": "Windmill Ball",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Windmill-Ball.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C8PetAyA0-X/?igsh=MWVnNGY3ZzJhNXlmbA%3D%3D"
+    },
+    {
+      "name": "Baseball Catcher",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Baesball-Catcher.mov",
+      "inspirationLink": "https://www.instagram.com/reel/C-5brEmuEGR/?igsh=b2RyY2FiODZldmVt"
+    },
+    {
+      "name": "Driving Cow",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Driving-Cow.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C89Mw2cOnVF/?igsh=Y3NseHFiNDNqbG5m"
+    },
+    {
+      "name": "Pass Shovel",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Pass-Shovel.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C6escBcPnhq/?igsh=MWR2bjR6Z2lmZjBoZA%3D%3D"
+    },
+    {
+      "name": "Turn & Look",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Turn-Look.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_YYmqbO_YT/?igsh=MXh0NzNleng4Z3AybQ%3D%3D"
+    },
+    {
+      "name": "Bull Stomp",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Bull-Stomp.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-kGpQ1RBi3/?igsh=MTNoeDlqM241MzRk"
+    },
+    {
+      "name": "Knife Fall",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Knife-Fall.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_IqMWyxnKk/?igsh=MXZhbHN6em80OWczag%3D%3D"
+    },
+    {
+      "name": "Sand Soccer",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Soccer-Kick.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C9FeHr9O6n4/?igsh=NXRudzY5aWVhdGth"
+    },
+    {
+      "name": "Mini Sledgehammer",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Mini-Sledgehammer.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-kEOF8gI43/?igsh=OWVnejk0aWh3emYz"
+    },
+    {
+      "name": "Football Toss",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Football-Toss.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C6ZIrEAO0Hn/?igsh=MWZnZjA0b3VocnR1bw%3D%3D"
+    },
+    {
+      "name": "BMX Stairs",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/BMX-Stairs.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C8aUOwFStWn/?igsh=MTUwOXRvMHljanpmaQ%3D%3D"
+    },
+    {
+      "name": "Freezer Bomb",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Freezer-Bomb.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C4nK0o5LwNd/?igsh=MW1ldTZuZWw2MTJyMg%3D%3D"
+    },
+    {
+      "name": "Basketball Roof",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/09/Basketball-Roof.mp4",
+      "inspirationLink": "https://www.instagram.com/torro.io"
+    },
+    {
+      "name": "Missed Pass",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/07/Missed-Pass.mov",
+      "inspirationLink": "https://www.instagram.com/torro.io"
+    },
+    {
+      "name": "Basketball Fail",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/07/Basketball-Fail-.mov",
+      "inspirationLink": ""
+    },
+    {
+      "name": "Truck Door Opening",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/07/Truck-Door-Opening.mov",
+      "inspirationLink": ""
+    },
+    {
+      "name": "Chicken Lays Egg",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/07/Chicken-Lays-Egg.mov",
+      "inspirationLink": ""
+    },
+    {
+      "name": "Couch Airbag",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/07/Airbag-Couch-.mov",
+      "inspirationLink": ""
+    },
+    {
+      "name": "Piñata Fail",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/07/Pinata-Fail.mov",
+      "inspirationLink": ""
+    },
+    {
+      "name": "Horse Kicks Chicken",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/07/Horse-Kicks-Chicken-.mov",
+      "inspirationLink": ""
+    },
+    {
+      "name": "Jerry Peers Into Hole",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/07/Jerry-Peers-Through-Hole-.mov",
+      "inspirationLink": ""
+    },
+    {
+      "name": "Donkey Takes Tumble",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/07/Donkey-Takes-Tumble-.mov",
+      "inspirationLink": ""
+    },
+    {
+      "name": "Dirt Bike Fall",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Dirt-Bike-Fall.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C7O2ws-xAjh/?igsh=bzVlNjN2OTF6Mjdr"
+    },
+    {
+      "name": "Giant Axe",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Giant-Ax-Chop.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-Cy-sBy6r3/?igsh=cjZkNTJ0eTRjc2Rv"
+    },
+    {
+      "name": "Car Cornerback",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Car-Cornerback-.mov",
+      "inspirationLink": "https://www.instagram.com/reel/C82Sa_vv6OG/?igsh=MWprNXJpYXd0YXlqag%3D%3D"
+    },
+    {
+      "name": "Jump Into Water",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Little-Person-Jump-in-Water.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C8es_5XOtem/?igsh=ZTk3c2Rxd3o1d2cz"
+    },
+    {
+      "name": "Dirt Bike Flip",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Dirt-Bike-Flip.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C9KkOwgpMmM/?igsh=c3h0djBoZjJiZGJm"
+    },
+    {
+      "name": "Cat Toss",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Cat-Toss.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-2p3RxpJJp/?igsh=MWN4YzgyZnp2Nngzcw%3D%3D"
+    },
+    {
+      "name": "Jump Cone",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Jump-Cone.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-G37LOJZUT/?igsh=MXgyZXoxeG15cHY2bA%3D%3D"
+    },
+    {
+      "name": "Golf Spin",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Golf-Spin.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C7fExS9p4n1/?igsh=dms0eXUxOXZ5d3Bo"
+    },
+    {
+      "name": "Ninja Girl",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Ninja-Girl.mp4",
+      "inspirationLink": "https://www.instagram.com/anouar_off/reel/C-a46_kISTI/?igsh=eDEzZDNqZXFjbnZx"
+    },
+    {
+      "name": "Skateboard Slam",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Skateboard-Slam.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C7wXMQoRaHz/?igsh=aDA1b3E0MXVmOGx4"
+    },
+    {
+      "name": "Eagle Poo",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Eagle-Poo.mp4",
+      "inspirationLink": "https://www.instagram.com/torro.io"
+    },
+    {
+      "name": "Soccer Juggle",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Soccer-Juggle.mp4",
+      "inspirationLink": ""
+    },
+    {
+      "name": "Ninja Kick",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Ninja-Kick.mp4",
+      "inspirationLink": ""
+    },
+    {
+      "name": "Small Boat",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Small-Boat.mp4",
+      "inspirationLink": ""
+    },
+    {
+      "name": "Spin Kick",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Spin-Kick.mp4",
+      "inspirationLink": ""
+    },
+    {
+      "name": "Cow Roll",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Cow-Roll.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C_BALzipzbd/?igsh=MWY1NWN0aWc0em1pMQ%3D%3D"
+    },
+    {
+      "name": "Small Hula Hoop",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Small-Hula-Hoop.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-LRE4HI1-u/?igsh=MTltcm9jaHFwcXQ5cQ%3D%3D"
+    },
+    {
+      "name": "Basketball Smash",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Basketball-Smash.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-yXG42J403/?igsh=MTlseWw2bHM0aGg2"
+    },
+    {
+      "name": "Motorcycle Flip",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Motorcycle-Flip.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-24_DtxBau/?igsh=MWxucGw1Z2tmYWhncQ%3D%3D"
+    },
+    {
+      "name": "Small Rope",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Small-Rope.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C9OUNVLsWuy/?igsh=cjF5cDZsNnFvbW55"
+    },
+    {
+      "name": "Rope Swing",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Rope-Swing-Fail.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C7W_Xu9Jzdr/?igsh=MXIzeTF2OTQwNHJrcQ%3D%3D"
+    },
+    {
+      "name": "Kickboxer KO",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Kick-Boxer-KO.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C8XMJ3AgY-o/?igsh=MXVpcThtczJ1a2ltcg%3D%3D"
+    },
+    {
+      "name": "Soccer Surprise",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Soccer-Surprise.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C8uN6cNo34H/?igsh=MWluZTl5dzZxdzVrYQ%3D%3D"
+    },
+    {
+      "name": "Slip in Mud",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Slip-in-Mud.mp4",
+      "inspirationLink": "https://www.instagram.com/torro.io"
+    },
+    {
+      "name": "Baseball Foul",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Baseball-Foul-Tip.mp4",
+      "inspirationLink": ""
+    },
+    {
+      "name": "Flying Drop Phone",
+      "videoUrl": "https://transitionalhooks.com/wp-content/uploads/2024/08/Flying-Drop-Phone.mp4",
+      "inspirationLink": "https://www.instagram.com/reel/C-K12uBJOw3/?igsh=NjFrcTIybWZrcTVv"
+    }
+  ]
+        };
+
+        // Pagination configuration
+        const ITEMS_PER_PAGE = 12;
+        let currentPage = 1;
+        let filteredVideos = [...videoData.videos];
+
+        function displayVideos(videos, page = 1) {
+            const videoGrid = document.getElementById('videoGrid');
+            videoGrid.innerHTML = '';
+            
+            if (videos.length === 0) {
+                videoGrid.innerHTML = `
+                    <div class="col-span-full text-center text-gray-500 py-8">
+                        No videos found matching your search.
+                    </div>
+                `;
+                return;
+            }
+
+            const startIndex = (page - 1) * ITEMS_PER_PAGE;
+            const endIndex = startIndex + ITEMS_PER_PAGE;
+            const paginatedVideos = videos.slice(startIndex, endIndex);
+
+            paginatedVideos.forEach(video => {
+                const card = document.createElement('div');
+                card.className = 'video-card shadow-lg';
+                card.innerHTML = `
+                    <div class="video-container">
+                        <video loop autoplay muted playsinline preload="none" poster="/api/placeholder/400/711">
+                            <source src="${video.videoUrl}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">${video.name}</h3>
+                        <div class="flex flex-col gap-2">
+                            ${video.inspirationLink ? `
+                                <a href="${video.inspirationLink}" 
+                                   target="_blank" 
+                                   class="text-blue-500 hover:text-blue-700 text-sm inline-flex items-center">
+                                    <span>View Original</span>
+                                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                    </svg>
+                                </a>
+                            ` : ''}
+                            <a href="${video.videoUrl}" 
+                               download="${video.name}.mp4"
+                               class="btn-download w-full justify-center">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Download
+                            </a>
+                        </div>
+                    </div>
+                `;
+
+                // Add video playing functionality
+                const videoElement = card.querySelector('video');
+                videoElement.addEventListener('mouseenter', () => {
+                    videoElement.play().catch(err => console.log("Video play failed:", err));
+                });
+                videoElement.addEventListener('mouseleave', () => {
+                    videoElement.pause();
+                    videoElement.currentTime = 0;
+                });
+
+                videoGrid.appendChild(card);
+            });
+
+            updatePagination(videos.length);
+        }
+
+        function updatePagination(totalItems) {
+            const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            // Previous button
+            const prevButton = createPaginationButton('Previous', currentPage > 1);
+            prevButton.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayVideos(filteredVideos, currentPage);
+                }
+            });
+            pagination.appendChild(prevButton);
+
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = createPaginationButton(i, true, i === currentPage);
+                pageButton.addEventListener('click', () => {
+                    currentPage = i;
+                    displayVideos(filteredVideos, currentPage);
+                });
+                pagination.appendChild(pageButton);
+            }
+
+            // Next button
+            const nextButton = createPaginationButton('Next', currentPage < totalPages);
+            nextButton.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    displayVideos(filteredVideos, currentPage);
+                }
+            });
+            pagination.appendChild(nextButton);
+        }
+
+        function createPaginationButton(text, enabled, isActive = false) {
+            const button = document.createElement('button');
+            button.textContent = text;
+            button.className = `pagination-btn ${isActive ? 'active' : ''}`;
+            button.disabled = !enabled;
+            return button;
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            filteredVideos = videoData.videos.filter(video => 
+                video.name.toLowerCase().includes(searchTerm)
+            );
+            currentPage = 1;
+            displayVideos(filteredVideos, currentPage);
+        });
+
+        // Initial display
+        document.addEventListener('DOMContentLoaded', () => {
+            displayVideos(videoData.videos, currentPage);
+        });
+    </script>
+</body>
+</html>
