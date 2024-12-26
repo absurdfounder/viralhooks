@@ -1168,28 +1168,24 @@ function handleVideos() {
     const videos = document.querySelectorAll('.video-container video');
     
     videos.forEach(video => {
-        // Set the source only when needed
-        const videoUrl = video.getAttribute('data-src');
-        const source = video.querySelector('source');
-        if (videoUrl && source) {
-            source.src = videoUrl;
-            video.load();
-        }
-
-        // Handle hover behavior
-        video.addEventListener('mouseenter', () => {
-            if (video.readyState >= 2) {
-                const playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(() => {});
-                }
+        // Auto-play as soon as metadata is loaded
+        video.addEventListener('loadedmetadata', () => {
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // Auto-play was prevented, try one more time
+                    video.muted = true;  // Ensure muted
+                    video.play().catch(() => {});
+                });
             }
         });
 
-        video.addEventListener('mouseleave', () => {
-            video.pause();
-            video.currentTime = 0;
+        // If video stops, restart it
+        video.addEventListener('ended', () => {
+            video.play().catch(() => {});
         });
+
+        video.load();
     });
 }
 
@@ -1215,17 +1211,19 @@ function displayVideos(videos, page = 1) {
         card.className = "video-card shadow-lg";
         card.setAttribute("role", "gridcell");
 
+
+
         const videoHtml = `
             <div class="video-container">
-                <video 
-                    loop 
-                    muted 
-                    playsinline 
-                    preload="none"
-                    poster="/api/placeholder/400/711"
-                    data-src="${video.videoUrl}"
-                >
-                    <source src="" type="video/mp4">
+        <video 
+            loop 
+            muted 
+            autoplay  // Add this
+            playsinline 
+            preload="auto"  // Change to auto
+            poster="/api/placeholder/400/711"
+        >
+            <source src="${video.videoUrl}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
