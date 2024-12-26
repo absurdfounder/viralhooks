@@ -1146,11 +1146,19 @@
                     },
                 ],
             };
+// Shuffle array function using Fisher-Yates algorithm
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 
-            // Pagination configuration
-            const ITEMS_PER_PAGE = 12;
-            let currentPage = 1;
-            let filteredVideos = [...videoData.videos];
+// Pagination configuration
+const ITEMS_PER_PAGE = 12;
+let currentPage = 1;
+let filteredVideos = shuffleArray([...videoData.videos]); // Shuffle initially
 
 function displayVideos(videos, page = 1) {
     const videoGrid = document.getElementById("videoGrid");
@@ -1169,17 +1177,25 @@ function displayVideos(videos, page = 1) {
     const endIndex = startIndex + ITEMS_PER_PAGE;
     const paginatedVideos = videos.slice(startIndex, endIndex);
 
+    // Create all video elements immediately
+    const fragment = document.createDocumentFragment();
+
     paginatedVideos.forEach((video) => {
-        // Use encodeURIComponent for better URL encoding
-        const encodedVideoUrl = encodeURIComponent(video.videoUrl);
-        const encodedInspirationLink = video.inspirationLink ? encodeURIComponent(video.inspirationLink) : '';
-        
         const card = document.createElement("div");
         card.className = "video-card shadow-lg";
         card.setAttribute("role", "gridcell");
-        card.innerHTML = `
+
+        // Optimize video loading
+        const videoHtml = `
             <div class="video-container">
-                <video loop muted playsinline preload="none" poster="/api/placeholder/400/711">
+                <video 
+                    loop 
+                    muted 
+                    playsinline 
+                    preload="metadata"
+                    poster="/api/placeholder/400/711"
+                    data-src="${video.videoUrl}"
+                >
                     <source src="${video.videoUrl}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -1201,120 +1217,87 @@ function displayVideos(videos, page = 1) {
             </div>
         `;
 
-        // Add video playing functionality
+        card.innerHTML = videoHtml;
+
+        // Add optimized video playing functionality
         const videoElement = card.querySelector("video");
-        videoElement.addEventListener("mouseenter", () => {
-            videoElement.play().catch((err) => console.log("Video play failed:", err));
-        });
-        videoElement.addEventListener("mouseleave", () => {
-            videoElement.pause();
-            videoElement.currentTime = 0;
+        
+        // Use Intersection Observer for lazy loading
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const video = entry.target;
+                    if (!video.src) {
+                        video.src = video.dataset.src;
+                    }
+                    observer.unobserve(video);
+                }
+            });
+        }, {
+            rootMargin: '50px 0px', // Start loading slightly before the video comes into view
+            threshold: 0.1
         });
 
-        videoGrid.appendChild(card);
+        observer.observe(videoElement);
+
+        // Optimize hover behavior
+        let playPromise;
+        videoElement.addEventListener("mouseenter", () => {
+            if (videoElement.readyState >= 2) { // Have enough data to play
+                playPromise = videoElement.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {}); // Silently handle any play() rejection
+                }
+            }
+        });
+
+        videoElement.addEventListener("mouseleave", () => {
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    videoElement.pause();
+                    videoElement.currentTime = 0;
+                }).catch(() => {});
+            }
+        });
+
+        fragment.appendChild(card);
     });
 
+    videoGrid.appendChild(fragment);
     updatePagination(videos.length);
 }
 
+// Initialize display immediately when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        displayVideos(filteredVideos, currentPage);
+        document.getElementById("loading").style.display = "none";
+    });
+} else {
+    displayVideos(filteredVideos, currentPage);
+    document.getElementById("loading").style.display = "none";
+}
 
-            function updatePagination(totalItems) {
-                const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
-                const pagination = document.getElementById("pagination");
-                pagination.innerHTML = "";
+// Search functionality with debouncing
+const searchInput = document.getElementById("searchInput");
+let debounceTimeout;
 
-                // Previous button
-                const prevButton = createPaginationButton("Previous", currentPage > 1);
-                prevButton.addEventListener("click", () => {
-                    if (currentPage > 1) {
-                        currentPage--;
-                        displayVideos(filteredVideos, currentPage);
-                    }
-                });
-                pagination.appendChild(prevButton);
+searchInput.addEventListener("input", (e) => {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+        const searchTerm = e.target.value.toLowerCase();
+        filteredVideos = videoData.videos.filter((video) => 
+            video.name.toLowerCase().includes(searchTerm)
+        );
+        currentPage = 1;
+        displayVideos(filteredVideos, currentPage);
+    }, 300); // 300ms debounce delay
+});
 
-                // Page numbers
-                for (let i = 1; i <= totalPages; i++) {
-                    const pageButton = createPaginationButton(i, true, i === currentPage);
-                    pageButton.addEventListener("click", () => {
-                        currentPage = i;
-                        displayVideos(filteredVideos, currentPage);
-                    });
-                    pagination.appendChild(pageButton);
-                }
-
-                // Next button
-                const nextButton = createPaginationButton("Next", currentPage < totalPages);
-                nextButton.addEventListener("click", () => {
-                    if (currentPage < totalPages) {
-                        currentPage++;
-                        displayVideos(filteredVideos, currentPage);
-                    }
-                });
-                pagination.appendChild(nextButton);
-            }
-
-            function createPaginationButton(text, enabled, isActive = false) {
-                const button = document.createElement("button");
-                button.textContent = text;
-                button.className = `pagination-btn ${isActive ? "active" : ""}`;
-                button.disabled = !enabled;
-                if (typeof text === "number") {
-                    button.setAttribute("aria-label", `Page ${text}`);
-                }
-                return button;
-            }
-
-            // Search functionality
-            const searchInput = document.getElementById("searchInput");
-            searchInput.addEventListener("input", (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                filteredVideos = videoData.videos.filter((video) => video.name.toLowerCase().includes(searchTerm));
-                currentPage = 1;
-                displayVideos(filteredVideos, currentPage);
-            });
-
-            // Initialize
-            document.addEventListener("DOMContentLoaded", () => {
-                displayVideos(videoData.videos, currentPage);
-
-                // Remove loading screen
-                setTimeout(() => {
-                    document.getElementById("loading").style.display = "none";
-                }, 500);
-            });
-
-            // Lazy loading for videos
-            if ("IntersectionObserver" in window) {
-                const videoObserver = new IntersectionObserver((entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            const video = entry.target;
-                            video.preload = "auto";
-                            videoObserver.unobserve(video);
-                        }
-                    });
-                });
-
-                document.querySelectorAll(".video-container video").forEach((video) => {
-                    videoObserver.observe(video);
-                });
-            }
-
-            // Performance monitoring
-            if (window.performance) {
-                const timing = window.performance.timing;
-                window.addEventListener("load", () => {
-                    const pageLoadTime = timing.loadEventEnd - timing.navigationStart;
-                    console.log("Page Load Time:", pageLoadTime + "ms");
-                });
-            }
-
-            // Error handling
-            window.addEventListener("error", (e) => {
-                console.error("Page Error:", e.error);
-                // You can implement error reporting here
-            });
+// Randomize on page reload
+window.addEventListener('beforeunload', () => {
+    localStorage.setItem('lastRandomSeed', Date.now().toString());
+});
         </script>
     </body>
 </html>
