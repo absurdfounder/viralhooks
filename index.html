@@ -1152,66 +1152,67 @@
             let currentPage = 1;
             let filteredVideos = [...videoData.videos];
 
-            function displayVideos(videos, page = 1) {
-                const videoGrid = document.getElementById("videoGrid");
-                videoGrid.innerHTML = "";
+function displayVideos(videos, page = 1) {
+    const videoGrid = document.getElementById("videoGrid");
+    videoGrid.innerHTML = "";
 
-                if (videos.length === 0) {
-                    videoGrid.innerHTML = `
-                    <div class="col-span-full text-center text-gray-500 py-8">
-                        No videos found matching your search.
-                    </div>
-                `;
-                    return;
-                }
+    if (videos.length === 0) {
+        videoGrid.innerHTML = `
+            <div class="col-span-full text-center text-gray-500 py-8">
+                No videos found matching your search.
+            </div>
+        `;
+        return;
+    }
 
-                const startIndex = (page - 1) * ITEMS_PER_PAGE;
-                const endIndex = startIndex + ITEMS_PER_PAGE;
-                const paginatedVideos = videos.slice(startIndex, endIndex);
+    const startIndex = (page - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const paginatedVideos = videos.slice(startIndex, endIndex);
 
-                paginatedVideos.forEach((video) => {
-                    const card = document.createElement("div");
-                    card.className = "video-card shadow-lg";
-                    card.setAttribute("role", "gridcell");
-                    card.innerHTML = `
-                    <div class="video-container">
-                        <video loop muted playsinline preload="none" poster="/api/placeholder/400/711">
-                            <source src="${video.videoUrl}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-<div class="p-4">
-    <h3 class="text-lg font-semibold text-gray-800 mb-2">${video.name}</h3>
-    <div class="flex flex-col gap-2">
-        ${video.inspirationLink ? 
-            `<a href="${video.inspirationLink}" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-700 text-sm inline-flex items-center">
-                View Original
-                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>` 
-        : ''}
-        <a href="${video.videoUrl}" download="${video.name}.mp4" class="btn-download w-full justify-center inline-flex items-center">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-            Download
-        </a>
-    </div>
-</div>
-                `;
+    paginatedVideos.forEach((video) => {
+        const encodedVideoUrl = encodeURI(video.videoUrl);
+        const card = document.createElement("div");
+        card.className = "video-card shadow-lg";
+        card.setAttribute("role", "gridcell");
+        card.innerHTML = `
+            <div class="video-container">
+                <video loop muted playsinline preload="none" poster="/api/placeholder/400/711">
+                    <source src="${encodedVideoUrl}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="p-4">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">${video.name}</h3>
+                <div class="flex flex-col gap-2">
+                    ${video.inspirationLink ? 
+                        `<a href="${encodeURI(video.inspirationLink)}" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-700 text-sm inline-flex items-center">
+                            View Original
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002-2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        </a>` 
+                        : ''}
+                    <a href="${encodedVideoUrl}" download="${encodeURIComponent(video.name)}.mp4" class="btn-download w-full justify-center inline-flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+            </div>
+        `;
 
-                    // Add video playing functionality
-                    const videoElement = card.querySelector("video");
-                    videoElement.addEventListener("mouseenter", () => {
-                        videoElement.play().catch((err) => console.log("Video play failed:", err));
-                    });
-                    videoElement.addEventListener("mouseleave", () => {
-                        videoElement.pause();
-                        videoElement.currentTime = 0;
-                    });
+        // Add video playing functionality
+        const videoElement = card.querySelector("video");
+        videoElement.addEventListener("mouseenter", () => {
+            videoElement.play().catch((err) => console.log("Video play failed:", err));
+        });
+        videoElement.addEventListener("mouseleave", () => {
+            videoElement.pause();
+            videoElement.currentTime = 0;
+        });
 
-                    videoGrid.appendChild(card);
-                });
+        videoGrid.appendChild(card);
+    });
 
-                updatePagination(videos.length);
-            }
+    updatePagination(videos.length);
+}
 
             function updatePagination(totalItems) {
                 const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
