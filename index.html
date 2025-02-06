@@ -369,9 +369,9 @@
     </div>
 
 
-    <nav id="Pagination" class="flex justify-center items-center gap-2 py-8" aria-label="Pagination">
-        <!-- Pagination will be dynamically inserted here -->
-    </nav>
+<nav id="pagination" class="flex justify-center items-center gap-2 py-8" aria-label="Pagination">
+    <!-- Pagination will be dynamically inserted here -->
+</nav>
 
 <a class="inline-flex items-center justify-center fixed bottom-4 left-4" href="https://boringsites.com?via=https://viralhooks.org/" target="_blank" rel="noopener noreferrer">
     <button type="button" class="text-xs font-bold shadow-lg backdrop-blur-lg rounded-md flex items-center border text-white p-1 px-2 hover:border-slate-600 bg-black" tabindex="0" style="will-change: auto; transform: none;">
@@ -1341,11 +1341,13 @@ function handleVideos() {
     });
 }
 
-function displayVideos(videos, page = 1) {
+function displayVideos(videos, page = 1, append = false) {
     const videoGrid = document.getElementById("videoGrid");
-    videoGrid.innerHTML = "";
-
-    if (videos.length === 0) {
+    if (!append) {
+        videoGrid.innerHTML = "";
+    }
+    
+    if (videos.length === 0 && !append) {
         videoGrid.innerHTML = `
             <div class="col-span-full text-center text-gray-500 py-8">
                 No videos found matching your search.
@@ -1353,7 +1355,7 @@ function displayVideos(videos, page = 1) {
         `;
         return;
     }
-
+    
     const startIndex = (page - 1) * ITEMS_PER_PAGE;
     const endIndex = startIndex + ITEMS_PER_PAGE;
     const paginatedVideos = videos.slice(startIndex, endIndex);
@@ -1363,19 +1365,17 @@ function displayVideos(videos, page = 1) {
         card.className = "video-card shadow-lg";
         card.setAttribute("role", "gridcell");
 
-
-
         const videoHtml = `
             <div class="video-container">
-        <video 
-            loop 
-            muted 
-            autoplay  // Add this
-            playsinline 
-            preload="auto"  // Change to auto
-            poster="/api/placeholder/400/711"
-        >
-            <source src="${video.videoUrl}" type="video/mp4">
+                <video 
+                    loop 
+                    muted 
+                    autoplay
+                    playsinline 
+                    preload="auto"
+                    poster="/api/placeholder/400/711"
+                >
+                    <source src="${video.videoUrl}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
@@ -1385,11 +1385,15 @@ function displayVideos(videos, page = 1) {
                     ${video.inspirationLink ? 
                         `<a href="${video.inspirationLink}" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-700 text-sm inline-flex items-center">
                             View Original
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002-2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002-2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
                         </a>` 
                         : ''}
                     <a href="${video.videoUrl}" download="${video.name}.mp4" class="btn-download w-full justify-center inline-flex items-center">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
                         Download
                     </a>
                 </div>
@@ -1400,10 +1404,11 @@ function displayVideos(videos, page = 1) {
         videoGrid.appendChild(card);
     });
 
-    // Initialize video handling after adding to DOM
+    // Re-initialize video handling after adding new items
     handleVideos();
     updatePagination(videos.length);
 }
+
 
 function updatePagination(totalItems) {
     const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
@@ -1507,6 +1512,30 @@ function cleanupVideos() {
 window.addEventListener('beforeunload', () => {
     localStorage.setItem('lastRandomSeed', Date.now().toString());
 });
+
+
+// Setup Intersection Observer on the pagination element
+const paginationNav = document.getElementById("pagination");
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const totalPages = Math.ceil(filteredVideos.length / ITEMS_PER_PAGE);
+            if (currentPage < totalPages) {
+                currentPage++;
+                // Append the new page’s videos instead of replacing existing ones
+                displayVideos(filteredVideos, currentPage, true);
+            }
+        }
+    });
+}, {
+    root: null,      // use the viewport as root
+    threshold: 0.5   // trigger when 50% of the pagination element is visible
+});
+
+observer.observe(paginationNav);
+
+
+
 </script>
 
 
